@@ -1,0 +1,20 @@
+{
+  "appId": "com.churchmanager.app",
+  "appName": "Church Manager",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": null,
+      "keystoreAlias": null,
+      "keystorePassword": null,
+      "keystoreKeyPassword": null,
+      "keystoreKeyAlias": null,
+      "keystoreKeyAliasPassword": null
+    }
+  }
+}
+

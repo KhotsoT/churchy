@@ -1,0 +1,190 @@
+.donations-screen {
+  padding: 0;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-mini-card {
+  text-align: center;
+}
+
+.stat-mini-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.stat-mini-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.filters-card {
+  margin-bottom: 24px;
+}
+
+.filters-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filters-row .input-wrapper {
+  margin: 0;
+  min-width: 200px;
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+}
+
+.donations-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.donations-table th {
+  text-align: left;
+  padding: 16px 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+.donations-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.donations-table tr:last-child td {
+  border-bottom: none;
+}
+
+.donations-table tr:hover {
+  background: var(--background);
+}
+
+.date-cell {
+  white-space: nowrap;
+}
+
+.donor-cell {
+  font-weight: 500;
+}
+
+.amount-cell {
+  font-weight: 600;
+  color: var(--success) !important;
+}
+
+.method-cell {
+  text-transform: capitalize;
+}
+
+.type-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.type-tithe {
+  background: rgba(74, 144, 226, 0.1);
+  color: var(--primary);
+}
+
+.type-offering {
+  background: rgba(39, 174, 96, 0.1);
+  color: var(--success);
+}
+
+.type-building {
+  background: rgba(243, 156, 18, 0.1);
+  color: var(--warning);
+}
+
+.type-mission {
+  background: rgba(123, 104, 238, 0.1);
+  color: var(--secondary);
+}
+
+.type-other {
+  background: rgba(127, 140, 141, 0.1);
+  color: var(--text-secondary);
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.actions-cell .btn {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.delete-btn {
+  color: var(--error) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .page-header .btn {
+    width: 100%;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters-row {
+    flex-direction: column;
+  }
+
+  .filters-row .input-wrapper {
+    min-width: 100%;
+  }
+}

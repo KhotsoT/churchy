@@ -1,0 +1,180 @@
+# Church Manager - Cursor AI Rules
+
+## Project Overview
+This is a comprehensive church management system built with:
+- **Frontend**: React + Vite + Capacitor (TypeScript)
+- **Backend**: Node.js + Express + MongoDB
+- **Package Manager**: Yarn (NOT npm)
+- **Mobile**: Capacitor (NOT Expo)
+
+## Key Principles
+
+### 1. Technology Stack
+- ✅ Use Yarn, never npm
+- ✅ Use Capacitor for mobile, NOT Expo
+- ✅ Use Vite for building, NOT webpack
+- ✅ Use React Router for navigation, NOT React Navigation
+- ✅ Use TypeScript with strict mode
+- ✅ Use CSS for styling (no CSS-in-JS libraries)
+
+### 2. Code Style
+- Use functional components with hooks
+- Use TypeScript for all files
+- Follow existing patterns in gennessence-app when applicable
+- Use path aliases (@components, @screens, etc.)
+- Keep components small and focused
+- Use custom UI components from `src/components/ui/`
+
+### 3. File Structure
+```
+src/
+  components/     # Reusable components
+    ui/           # Base UI components (Button, Input, Card)
+  screens/        # Page components
+  services/       # API services
+  store/          # Zustand stores
+  types/          # TypeScript types
+  utils/          # Utility functions
+```
+
+### 4. API Integration
+- All API calls go through `src/services/api.ts`
+- Use async/await, not promises
+- Handle errors consistently
+- Show loading states
+- Use React Hook Form for forms
+- Validate with Yup schemas
+
+### 5. State Management
+- Use Zustand for global state
+- Keep state minimal and focused
+- Use local state for component-specific data
+- Store auth token in Capacitor Preferences
+
+### 6. Styling
+- Use CSS files (not CSS modules by default)
+- Use CSS variables from `src/index.css`
+- Follow existing component patterns
+- Make responsive (mobile-first)
+- Use semantic HTML
+
+### 7. Backend
+- All routes in `server/routes/`
+- All models in `server/models/`
+- Use Express middleware for auth
+- Validate input with express-validator
+- Return consistent API responses: `{ success: boolean, data?: T, error?: string }`
+
+### 8. Database
+- Use MongoDB with Mongoose
+- All models have timestamps
+- Use proper relationships (refs)
+- Include churchId for multi-tenancy
+
+## Current Status
+
+### ✅ Completed
+- Project setup and migration from Expo
+- Authentication system (login/register)
+- Basic UI components
+- Screen structure (all screens exist)
+- Backend API skeleton
+- Type system
+
+### 🚧 In Progress / TODO
+- Connect frontend to backend APIs
+- Complete feature implementations
+- Add proper error handling
+- Add loading states everywhere
+- Complete all CRUD operations
+- Add toast notifications
+- Improve mobile experience
+
+## Next Steps Priority
+
+1. **HIGH**: Connect Dashboard to real API data
+2. **HIGH**: Complete Members CRUD (connect to backend)
+3. **HIGH**: Complete Events CRUD
+4. **MEDIUM**: Add toast notifications
+5. **MEDIUM**: Improve error handling
+6. **MEDIUM**: Complete Donations feature
+7. **LOW**: Add advanced features
+
+## Important Notes
+
+- **Never use npm** - always use yarn
+- **Never use Expo** - we use Capacitor
+- **Never use React Native components** - we're on web React
+- **Always use TypeScript** - no .js files in src/
+- **Follow existing patterns** - check gennessence-app for reference
+- **Test on mobile** - use `yarn build && yarn sync && yarn android/ios`
+
+## Common Patterns
+
+### API Call Pattern
+```typescript
+const loadData = async () => {
+  setLoading(true);
+  try {
+    const response = await apiService.get<DataType>('/endpoint');
+    if (response.success && response.data) {
+      setData(response.data);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    // Show error to user
+  } finally {
+    setLoading(false);
+  }
+};
+```
+
+### Form Pattern
+```typescript
+const { control, handleSubmit, formState: { errors } } = useForm<FormType>({
+  resolver: yupResolver(schema),
+  defaultValues: { ... }
+});
+
+<Controller
+  control={control}
+  name="fieldName"
+  render={({ field }) => (
+    <Input {...field} error={errors.fieldName?.message} />
+  )}
+/>
+```
+
+### Navigation Pattern
+```typescript
+import { useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate();
+navigate('/path');
+```
+
+## When Adding Features
+
+1. Check if types exist in `src/types/index.ts`
+2. Add API route in `server/routes/`
+3. Add service method in `src/services/`
+4. Create/update screen component
+5. Add navigation route in `src/App.tsx`
+6. Test on web and mobile
+
+## Debugging
+
+- Frontend: Check browser console
+- Backend: Check server logs
+- Mobile: Use `adb logcat` for Android
+- API: Test with Postman/curl
+- Database: Check MongoDB connection
+
+## Remember
+
+- This is a web app that runs on mobile via Capacitor
+- Use standard web APIs (fetch, localStorage via Capacitor)
+- Test in browser first, then on mobile
+- Keep bundle size reasonable
+- Use lazy loading for routes if needed
+
