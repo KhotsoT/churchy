@@ -18,10 +18,6 @@ export const donationService = {
     return apiService.post<Donation>('/donations', data);
   },
 
-  async update(id: string, data: Partial<Donation>) {
-    return apiService.put<Donation>(`/donations/${id}`, data);
-  },
-
   async delete(id: string) {
     return apiService.delete(`/donations/${id}`);
   },

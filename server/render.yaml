@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: churchy-api
+    env: node
+    buildCommand: yarn install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+

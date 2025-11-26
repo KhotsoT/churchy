@@ -46,13 +46,7 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 500,
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: false,
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild',
     assetsDir: 'assets',
     sourcemap: false,
   },

@@ -1,6 +1,6 @@
 export const API_BASE_URL = import.meta.env.DEV
   ? '/api'
-  : 'https://api.churchmanager.com/api';
+  : 'https://churchy.onrender.com/api';
 
 export const STORAGE_KEYS = {
   AUTH_TOKEN: 'auth_token',
