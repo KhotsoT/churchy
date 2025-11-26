@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,11 +13,22 @@ import './LoginScreen.css';
 export default function LoginScreen() {
   const navigate = useNavigate();
   const [error, setError] = useState<string>('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const { login } = useAuthStore();
-  const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginCredentials>({
+  
+  // Load remembered email on mount
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+      setRememberMe(true);
+    }
+  }, []);
+
+  const { control, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm<LoginCredentials>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      email: '',
+      email: localStorage.getItem('rememberedEmail') || '',
       password: '',
     },
   });
@@ -25,6 +36,11 @@ export default function LoginScreen() {
   const onSubmit = async (data: LoginCredentials) => {
     try {
       setError('');
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', data.email);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+      }
       await login(data);
       navigate('/dashboard');
     } catch (err: any) {
@@ -60,15 +76,33 @@ export default function LoginScreen() {
               control={control}
               name="password"
               render={({ field }) => (
-                <Input
-                  {...field}
-                  type="password"
-                  label="Password"
-                  error={errors.password?.message}
-                  placeholder="Enter your password"
-                />
+                <div className="password-field">
+                  <Input
+                    {...field}
+                    type={showPassword ? 'text' : 'password'}
+                    label="Password"
+                    error={errors.password?.message}
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    className="show-password-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? '🙈' : '👁️'}
+                  </button>
+                </div>
               )}
             />
+
+            <label className="remember-me">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              <span>Remember me</span>
+            </label>
 
             <Button
               type="submit"
